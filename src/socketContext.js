@@ -11,7 +11,7 @@ export default function ContextProvider({children}) {
     const [callAccepted, setCallAccepted] = useState(false)
     const [callEnded, setCallEnded] = useState(false);
     const [name, setName] = useState('');
-    const [call, setCall] = useState({});
+    const [call, setCall] = useState({}); 
     const [me, setMe] = useState('');
     const connectionRef = useRef();
     const userVideo = useRef();
