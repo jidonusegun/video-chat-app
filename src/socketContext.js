@@ -18,13 +18,16 @@ export default function ContextProvider({children}) {
     const myVideo = useRef()
 
     useEffect(() => {
-        const getCamera = async() => {
-            const currentStream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
-
-            setStream(currentStream)
-            myVideo.current.srcObject = currentStream
-        }
-        getCamera();
+        const getUserMedia = async () => {
+            try {
+              const stream = await navigator.mediaDevices.getUserMedia({video: true});
+              myVideo.current.srcObject = stream;
+              setStream(stream)
+            } catch (err) {
+              console.log(err);
+            }
+        };
+          getUserMedia();
         socket.on('me', (id) => setMe(id));
 
         socket.on('calluser', ({from, name: callerName, signal}) => {
